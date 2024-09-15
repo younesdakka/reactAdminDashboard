@@ -5,7 +5,6 @@ import {
     Stack,
     styled,
     Toolbar,
-    Typography,
     useTheme,
 } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
@@ -22,6 +21,7 @@ const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
+// @ts-ignore
 })(({ theme, open }) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -81,7 +81,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const TopPar = ({ open, handleDrawerOpen,setMode }) => {
     const theme = useTheme()
     return (
-        <AppBar position="fixed" open={open}>
+        <AppBar position="fixed" 
+// @ts-ignore
+        open={open}>
             <Toolbar>
                 <IconButton
                     color="inherit"

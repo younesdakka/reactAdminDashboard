@@ -49,7 +49,7 @@ const Team = () => {
           <Box
             sx={{
               backgroundColor: access === 'Admin' ? theme.palette.primary.dark : access === 'Manager' ? theme.palette.secondary.dark :'green',
-              p: '5px', mt: '7px', display: 'flex', justifyContent: 'space-evenly'
+              p: '5px', mt: '7px', display: 'flex', justifyContent: 'space-evenly' , marginLeft :'40%' , width:'99px' 
             }}
           >
             {access === 'Admin' && (
