@@ -19,8 +19,8 @@ import Faq from './page/faq/faq';
 import Form from './page/form/form';
 import Geography from './page/geography/geography';
 import Invoices from './page/invoices/invoices';
-import Line from './page/line/line';
-import Pie from './page/pie/pie';
+import Line from './page/line/lineChart';
+import Pie from './page/pie/pieChart';
 
 
 const router = createBrowserRouter(
