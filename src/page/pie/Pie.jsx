@@ -1,51 +1,46 @@
-import { ResponsiveBar } from '@nivo/bar'
-import { Box, useTheme } from '@mui/material';
+import { ResponsivePie } from "@nivo/pie";
 
+import { Box, useTheme } from "@mui/material";
 
 const data = [
-    {
-      year: 2019,
-      Spain: 900,
-      France: 1400,
-      Germany: 1700,
-    },
-  
-    {
-      year: 2020,
-      Spain: 1000,
-      France: 1500,
-      Germany: 1800,
-    },
-  
-    {
-      year: 2021,
-      Spain: 1100,
-      France: 1600,
-      Germany: 1900,
-    },
-  
-    {
-      year: 2022,
-      Spain: 1200,
-      France: 1700,
-      Germany: 2000,
-    },
-  
-    {
-      year: 2023,
-      Spain: 1260,
-      France: 1709,
-      Germany: 2080,
-    },
-  ];
-  const Bar = ({isDashbord = false }) => {
+  {
+    id: "React",
+    label: "React",
+    value: 272,
+    color: "hsl(107, 70%, 50%)",
+  },
+  {
+    id: "stylus",
+    label: "stylus",
+    value: 543,
+    color: "hsl(64, 70%, 50%)",
+  },
+  {
+    id: "sass",
+    label: "sass",
+    value: 401,
+    color: "hsl(41, 70%, 50%)",
+  },
+  {
+    id: "haskell",
+    label: "haskell",
+    value: 434,
+    color: "hsl(172, 70%, 50%)",
+  },
+  {
+    id: "nue",
+    label: "nue",
+    value: 333,
+    color: "hsl(219, 70%, 50%)",
+  },
+];
+
+const Pie = ( isDashbord = false ) => {
     const theme = useTheme();
     return (
-      <Box sx={{ height:isDashbord? "300px": "75vh" }}>
-        <ResponsiveBar
+      <Box sx={{ height: isDashbord ? "200px" : "75vh" }}>
+        <ResponsivePie
           data={data}
-          keys={["Spain", "France", "Germany"]}
-          indexBy="year"
           theme={{
             textColor: theme.palette.text.primary,
             fontSize: 11,
@@ -140,17 +135,38 @@ const data = [
               tableCellValue: {},
             },
           }}
-          margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-          padding={0.3}
-          valueScale={{ type: "linear" }}
-          indexScale={{ type: "band", round: true }}
-          colors={{ scheme: "paired" }}
+          margin={
+            isDashbord
+              ? { top: 10, right: 0, bottom: 10, left: 0 }
+              : { top: 40, right: 80, bottom: 80, left: 80 }
+          }
+          innerRadius={isDashbord ? 0.8 : 0.5}
+          padAngle={0.7}
+          cornerRadius={3}
+          activeOuterRadiusOffset={8}
+          colors={{ scheme: "nivo" }}
+          borderWidth={1}
+          borderColor={{
+            from: "color",
+            modifiers: [["darker", 0.2]],
+          }}
+          arcLinkLabelsSkipAngle={10}
+          arcLinkLabelsTextColor={theme.palette.text.primary}
+          arcLinkLabelsThickness={2}
+          arcLinkLabelsColor={{ from: "color" }}
+          arcLabelsSkipAngle={10}
+          enableArcLabels={isDashbord ? false : true}
+          enableArcLinkLabels={isDashbord ? false : true}
+          arcLabelsTextColor={{
+            from: "color",
+            modifiers: [["darker", 2]],
+          }}
           defs={[
             {
               id: "dots",
               type: "patternDots",
               background: "inherit",
-              color: "#38bcb2",
+              color: theme.palette.text.primary,
               size: 4,
               padding: 1,
               stagger: true,
@@ -159,7 +175,7 @@ const data = [
               id: "lines",
               type: "patternLines",
               background: "inherit",
-              color: "#eed312",
+              color: theme.palette.text.primary,
               rotation: -45,
               lineWidth: 6,
               spacing: 10,
@@ -168,79 +184,85 @@ const data = [
           fill={[
             {
               match: {
-                id: "fries",
+                id: "ruby",
               },
               id: "dots",
             },
             {
               match: {
-                id: "sandwich",
+                id: "c",
+              },
+              id: "dots",
+            },
+            {
+              match: {
+                id: "go",
+              },
+              id: "dots",
+            },
+            {
+              match: {
+                id: "python",
+              },
+              id: "dots",
+            },
+            {
+              match: {
+                id: "scala",
+              },
+              id: "lines",
+            },
+            {
+              match: {
+                id: "lisp",
+              },
+              id: "lines",
+            },
+            {
+              match: {
+                id: "elixir",
+              },
+              id: "lines",
+            },
+            {
+              match: {
+                id: "javascript",
               },
               id: "lines",
             },
           ]}
-          borderColor={{
-            from: "color",
-            modifiers: [["darker", 1.6]],
-          }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: isDashbord? null : "Year",
-            legendPosition: "middle",
-            legendOffset: 35,
-          }}
-          axisLeft={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend:  isDashbord? null : "salary/month",
-            legendPosition: "middle",
-            legendOffset: -55,
-          }}
-          labelSkipWidth={12}
-          labelSkipHeight={12}
-          labelTextColor={{
-            from: "color",
-            modifiers: [["darker", 1.6]],
-          }}
-          legends={[
-            {
-              dataFrom: "keys",
-              anchor: "bottom-right",
-              direction: "column",
-              justify: false,
-              translateX: 120,
-              translateY: 0,
-              itemsSpacing: 2,
-              itemWidth: 100,
-              itemHeight: 20,
-              itemDirection: "left-to-right",
-              itemOpacity: 0.85,
-              symbolSize: 20,
-              effects: [
-                {
-                  on: "hover",
-                  style: {
+          legends={
+            isDashbord
+              ? []
+              : [
+                  {
+                    anchor: "bottom",
+                    direction: "row",
+                    justify: false,
+                    translateX: 0,
+                    translateY: 56,
+                    itemsSpacing: 0,
+                    itemWidth: 100,
+                    itemHeight: 18,
+                    itemTextColor: theme.palette.text.primary,
+                    itemDirection: "left-to-right",
                     itemOpacity: 1,
+                    symbolSize: 18,
+                    symbolShape: "circle",
+                    effects: [
+                      {
+                        on: "hover",
+                        style: {
+                          itemTextColor: theme.palette.text.primary,
+                        },
+                      },
+                    ],
                   },
-                },
-              ],
-            },
-          ]}
-          role="application"
-          ariaLabel="Nivo bar chart demo"
-          barAriaLabel={function (e) {
-            return (
-              e.id + ": " + e.formattedValue + " in country: " + e.indexValue
-            );
-          }}
+                ]
+          }
         />
       </Box>
     );
   };
   
-  export default Bar;
+  export default Pie;
