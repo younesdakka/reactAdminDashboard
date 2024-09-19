@@ -94,6 +94,7 @@ const Array1 = [
 ];
 
 const Array2 = [
+  { text: "Task", icon: <PersonOutlinedIcon />, path: "/Task" },
   { text: "Profile Form", icon: <PersonOutlinedIcon />, path: "/form" },
   { text: "Calendar", icon: <CalendarTodayOutlinedIcon />, path: "/calendar" },
   {

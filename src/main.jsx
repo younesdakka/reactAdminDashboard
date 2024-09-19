@@ -21,6 +21,7 @@ import Geography from './page/geography/geography';
 import Invoices from './page/invoices/invoices';
 import Line from './page/line/lineChart';
 import Pie from './page/pie/pieChart';
+import Task from './page/new-form/Task';
 
 
 const router = createBrowserRouter(
@@ -37,6 +38,8 @@ const router = createBrowserRouter(
       <Route path='Invoices' element={<Invoices />} />
       <Route path='Line' element={<Line />} />
       <Route path='Pie' element={<Pie />} />
+      <Route path='Pie' element={<Pie />} />
+      <Route path='Task' element={<Task />} />
       
      
     </Route>
