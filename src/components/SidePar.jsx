@@ -94,7 +94,7 @@ const Array1 = [
 ];
 
 const Array2 = [
-  { text: "Task", icon: <PersonOutlinedIcon />, path: "/Task" },
+  
   { text: "Profile Form", icon: <PersonOutlinedIcon />, path: "/form" },
   { text: "Calendar", icon: <CalendarTodayOutlinedIcon />, path: "/calendar" },
   {
@@ -105,7 +105,7 @@ const Array2 = [
 ];
 
 const Array3 = [
-  { text: "Bar Chart", icon: <BarChartOutlinedIcon />, path: "/bar" },
+  { text: "Bar Chart", icon: <BarChartOutlinedIcon sx={{margin:0}} />, path: "/bar" },
   { text: "Pie Chart", icon: <PieChartOutlineOutlinedIcon />, path: "/pie" },
   { text: "Line Chart", icon: <TimelineOutlinedIcon />, path: "/line" },
   { text: "Geography Chart", icon: <MapOutlinedIcon />, path: "/geography" },
@@ -168,6 +168,7 @@ const SidePar = ({ open, handleDrawerClose }) => {
                   navigate(item.path);
                 }}
                 sx={{
+                  
                   minHeight: '48',
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
@@ -184,6 +185,7 @@ const SidePar = ({ open, handleDrawerClose }) => {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
+                    
                   }}
                 >
                   {item.icon}
