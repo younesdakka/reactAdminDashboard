@@ -1,15 +1,12 @@
 import * as React from 'react';
-import { createTheme, styled, ThemeProvider, useTheme } from '@mui/material/styles';
+import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 
 import TopPar from './components/TopPar';
 import SidePar from './components/SidePar';
 import { getDesignTokens } from './theme';
 import { Outlet } from 'react-router-dom';
-
-const drawerWidth = 240;
 
 
 

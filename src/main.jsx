@@ -21,13 +21,18 @@ import Geography from './page/geography/geography';
 import Invoices from './page/invoices/invoices';
 import Line from './page/line/lineChart';
 import Pie from './page/pie/pieChart';
-import Task from './page/new-form/Task';
+import Login from './page/LogInAndOut/Login';
+import Signup from './page/LogInAndOut/Signup';
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    
     <Route path="/" element={<App />}>
-      <Route index element={<Dashboord />} />
+      <Route index  element={<Signup />} />
+      <Route path='Login' element={<Login />} />
+
+      <Route path='Dashboord'  element={<Dashboord />} />
       <Route path='team' element={<Team />} />
       <Route path='bar' element={<Bar />} />
       <Route path='calendar' element={<Calendar />} />
@@ -39,7 +44,6 @@ const router = createBrowserRouter(
       <Route path='Line' element={<Line />} />
       <Route path='Pie' element={<Pie />} />
       <Route path='Pie' element={<Pie />} />
-      <Route path='Task' element={<Task />} />
       
      
     </Route>

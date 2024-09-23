@@ -16,10 +16,14 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
+    
     shouldForwardProp: (prop) => prop !== "open",
 // @ts-ignore
 })(({ theme, open }) => ({
@@ -80,6 +84,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const TopPar = ({ open, handleDrawerOpen,setMode }) => {
     const theme = useTheme()
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("authToken");
+        navigate('/Login')
+    };
     return (
         <AppBar position="fixed" 
 // @ts-ignore
@@ -139,6 +149,9 @@ const TopPar = ({ open, handleDrawerOpen,setMode }) => {
                     </IconButton>
                     <IconButton color="inherit">
                         <Person2OutlinedIcon fontSize="inherit" />
+                    </IconButton>
+                    <IconButton color="inherit" onClick={handleLogout}>
+                        <LogoutIcon fontSize="inherit" />
                     </IconButton>
                 </Stack>
             </Toolbar>

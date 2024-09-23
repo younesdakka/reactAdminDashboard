@@ -79,7 +79,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Array1 = [
-  { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/" },
+  { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/Dashboord" },
   { text: "Manage Team", icon: <PeopleOutlinedIcon />, path: "/team" },
   {
     text: "Contacts Information",

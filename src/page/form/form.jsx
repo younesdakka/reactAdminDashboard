@@ -63,13 +63,13 @@ const Form = () => {
 
         <TextField
           error={Boolean(errors.firstName)}
-          helperText={Boolean(errors.firstName) ? "This field is rquired & min 3 character" : null}
+          helperText={errors.firstName ? "This field is rquired & min 3 character" : null}
           {...register("firstName", { required: true, minLength: 3 })}
 
           sx={{ flex: 1 }} label="First Name" variant="filled" />
         <TextField
           error={Boolean(errors.lastName)}
-          helperText={Boolean(errors.lastName) ? "This field is rquired & min 3 character" : null}
+          helperText={errors.lastName ? "This field is rquired & min 3 character" : null}
           {...register("lastName", { required: true, minLength: 3 })}
 
           sx={{ flex: 1 }} label="Last Name" variant="filled" />
@@ -79,13 +79,13 @@ const Form = () => {
 
       <TextField
         error={Boolean(errors.email)}
-        helperText={Boolean(errors.email) ? "Please provide a valid email" : null}
+        helperText={errors.email ? "Please provide a valid email" : null}
         {...register("email", { required: true, minLength: 3, pattern: emailRegex })}
         label="Email" variant="filled" />
 
       <TextField
         error={Boolean(errors.contactNumber)}
-        helperText={Boolean(errors.contactNumber) ? "Please provide a Phone Number" : null}
+        helperText={errors.contactNumber ? "Please provide a Phone Number" : null}
         {...register("contactNumber", { required: true, pattern: phoneRegex })}
         label="Contact Number" variant="filled" />
       <TextField label="Adress 1" variant="filled" />
