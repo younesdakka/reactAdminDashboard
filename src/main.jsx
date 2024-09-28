@@ -23,6 +23,7 @@ import Line from './page/line/lineChart';
 import Pie from './page/pie/pieChart';
 import Login from './page/LogInAndOut/Login';
 import Signup from './page/LogInAndOut/Signup';
+import Categories from './page/categories/Categories';
 
 
 const router = createBrowserRouter(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index  element={<Signup />} />
       <Route path='Login' element={<Login />} />
+      <Route path='Categories' element={<Categories />} />
 
       <Route path='Dashboord'  element={<Dashboord />} />
       <Route path='team' element={<Team />} />
