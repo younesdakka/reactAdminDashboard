@@ -82,13 +82,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-const TopPar = ({ open, handleDrawerOpen,setMode }) => {
+const NavBar = ({ open, handleDrawerOpen,setMode }) => {
     const theme = useTheme()
     const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem("authToken");
-        navigate('/Login')
+        navigate('/login')
     };
     return (
         <AppBar position="fixed" 
@@ -159,4 +159,4 @@ const TopPar = ({ open, handleDrawerOpen,setMode }) => {
     );
 };
 
-export default TopPar;
+export default NavBar;

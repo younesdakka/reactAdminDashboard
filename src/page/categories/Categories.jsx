@@ -1,87 +1,93 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
-  Container, Typography, Select, MenuItem, CircularProgress, List, ListItem, ListItemText, Button, RadioGroup, FormControlLabel, Radio
-} from '@mui/material';
-
+  Container,
+  Typography,
+  Select,
+  MenuItem,
+  CircularProgress,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from "@mui/material";
+import { QuestionItem } from "./QuestionItem";
 const Categories = () => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [questions, setQuestions] = useState([]);
-  const [quizQuestions, setQuizQuestions] = useState([]); 
+  const [quizQuestions, setQuizQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userAnswers, setUserAnswers] = useState({});
-  const [showQuiz, setShowQuiz] = useState(false); 
-  const [score, setScore] = useState(null);  
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [score, setScore] = useState(null);
+
+  const fetchData = async (url, setData, setLoading, setError) => {
+    setLoading(true);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      setError("Error fetching data");
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    fetch('https://opentdb.com/api_category.php')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCategories(data.trivia_categories);
-      })
-      .catch((error) => {
-        setError('Error fetching categories');
-        console.error('Error fetching categories:', error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    const url = "https://opentdb.com/api_category.php";
+    fetchData(
+      url,
+      (data) => setCategories(data.trivia_categories),
+      setLoading,
+      setError
+    );
   }, []);
 
   useEffect(() => {
     if (selectedCategory) {
-      setLoading(true);
-      fetch(`https://opentdb.com/api.php?amount=10&type=multiple&category=${selectedCategory}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setQuestions(data.results);
-        })
-        .catch((error) => {
-          setError('Error fetching questions');
-          console.error('Error fetching questions:', error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      const url = `https://opentdb.com/api.php?amount=10&type=multiple&category=${selectedCategory}`;
+      fetchData(
+        url,
+        (data) => setQuestions(data.results),
+        setLoading,
+        setError
+      );
     }
   }, [selectedCategory]);
 
- 
   const startQuiz = () => {
     const shuffled = questions.sort(() => 0.5 - Math.random());
     const selected = shuffled.slice(0, 5);
     setQuizQuestions(selected);
     setShowQuiz(true);
-    setScore(null);  
+    setScore(null);
   };
 
-   const handleAnswerChange = (questionIndex, answer) => {
-    setUserAnswers(prevAnswers => ({
+  const handleAnswerChange = (questionIndex, answer) => {
+    setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionIndex]: answer
+      [questionIndex]: answer,
     }));
   };
 
-   const submitQuiz = () => {
+  const submitQuiz = () => {
     let correctAnswersCount = 0;
     quizQuestions.forEach((question, index) => {
       if (userAnswers[index] === question.correct_answer) {
         correctAnswersCount++;
       }
     });
-    setScore(correctAnswersCount);  
-    setShowQuiz(false);  
+    setScore(correctAnswersCount);
+    setShowQuiz(false);
   };
 
   return (
@@ -100,7 +106,7 @@ const Categories = () => {
         <MenuItem value="">
           <em>Select a category</em>
         </MenuItem>
-        {categories.map(category => (
+        {categories.map((category) => (
           <MenuItem key={category.id} value={category.id}>
             {category.name}
           </MenuItem>
@@ -111,20 +117,28 @@ const Categories = () => {
 
       {error && <Typography color="error">{error}</Typography>}
 
- 
       {questions.length > 0 && !showQuiz && score === null && (
         <Button variant="contained" color="primary" onClick={startQuiz}>
           Start Quiz
         </Button>
       )}
 
- 
       {showQuiz && quizQuestions.length > 0 && (
         <div>
           <Typography variant="h5" gutterBottom>
             Answer the questions:
           </Typography>
           <List>
+            {quizQuestions.map((question, index) => (
+              <QuestionItem
+                key={index} 
+                question={question}
+                index={index}
+                handleAnswerChange={handleAnswerChange}
+              />
+            ))}
+          </List>
+          {/* <List>
             {quizQuestions.map((question, index) => (
               <ListItem key={index}>
                 <ListItemText primary={<strong>{question.question}</strong>} />
@@ -144,18 +158,15 @@ const Categories = () => {
                 </RadioGroup>
               </ListItem>
             ))}
-          </List>
+          </List> */}
           <Button variant="contained" color="primary" onClick={submitQuiz}>
             Submit Quiz
           </Button>
         </div>
       )}
 
- 
       {score !== null && (
-        <Typography variant="h5">
-          Your score: {score} / 5
-        </Typography>
+        <Typography variant="h5">Your score: {score} / 5</Typography>
       )}
     </Container>
   );

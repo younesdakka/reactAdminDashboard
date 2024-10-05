@@ -3,8 +3,8 @@ import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import TopPar from './components/TopPar';
-import SidePar from './components/SidePar';
+import NavBar from './components/NavBar';
+import SideBar from './components/SideBar';
 import { getDesignTokens } from './theme';
 import { Outlet } from 'react-router-dom';
 
@@ -42,9 +42,9 @@ export default function MiniDrawer() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <TopPar open={open} handleDrawerOpen={handleDrawerOpen} setMode={setMode} />
+        <NavBar open={open} handleDrawerOpen={handleDrawerOpen} setMode={setMode} />
 
-        <SidePar open={open} handleDrawerClose={handleDrawerClose} />
+        <SideBar open={open} handleDrawerClose={handleDrawerClose} />
 
 
 

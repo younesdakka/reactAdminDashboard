@@ -3,7 +3,6 @@ import { TextField, Button, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
 
-
 const Login = () => {
   const navigate = useNavigate();
 
@@ -17,46 +16,47 @@ const Login = () => {
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (isMatch) {
-
         localStorage.setItem("authToken", user.token);
-        alert("تم تسجيل الدخول بنجاح!");
-        navigate('/Dashboord')
+        alert("Successfully logged in!");
+        navigate("/dashboord");
         setIsLoggedIn(true);
       } else {
-        alert("كلمة المرور غير صحيحة.");
+        alert("The password is incorrect.");
       }
     } else {
-      alert("اسم المستخدم غير موجود.");
+      alert("Username not found.");
     }
   };
   const goToSignup = () => {
-    navigate('/')
-  }
+    navigate("/");
+  };
   return (
     <Container>
-      <Typography variant="h4">تسجيل الدخول</Typography>
+      <Typography variant="h4">Log in</Typography>
       <TextField
-        label="اسم المستخدم"
+        label="User name"
         variant="outlined"
         fullWidth
         margin="normal"
         value={username}
+        name="username"
         onChange={(e) => setUsername(e.target.value)}
       />
       <TextField
-        label="كلمة المرور"
+        label="Password"
         variant="outlined"
         fullWidth
         margin="normal"
         type="password"
+        name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button variant="contained" color="primary" onClick={handleLogin}>
-        تسجيل الدخول
+        Login
       </Button>
       <Button color="secondary" onClick={goToSignup}>
-        إنشاء حساب جديد
+        Create a new account 
       </Button>
     </Container>
   );

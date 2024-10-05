@@ -4,76 +4,77 @@ import { useNavigate } from "react-router-dom";
 import bcrypt from "bcryptjs";
 
 const generateToken = () => {
-    return Math.random().toString(36).substr(2) + Date.now().toString(36);
-  };
+  return Math.random().toString(36).substr(2) + Date.now().toString(36);
+};
 const Signup = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignup = async () => {
-   
-        if (password !== confirmPassword) {
-          alert("كلمة المرور وتأكيد كلمة المرور غير متطابقتين.");
-          return;
-        }
+    if (password !== confirmPassword) {
+      alert("The password and confirm password do not match.");
+      return;
+    }
     const users = JSON.parse(localStorage.getItem("users")) || [];
-     const userExists = users.some(user => user.username === username);
-     if (userExists) {
-       alert("اسم المستخدم موجود مسبقًا.");
-       return;
-     }
+    const userExists = users.some((user) => user.username === username);
+    if (userExists) {
+      alert("The username already exists.");
+      return;
+    }
 
-     const hashedPassword = await bcrypt.hash(password, 10);
- 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const token = generateToken();
     const newUser = { username, password: hashedPassword, token };
     users.push(newUser);
     localStorage.setItem("users", JSON.stringify(users));
 
-    alert("تم إنشاء الحساب بنجاح!");
-    navigate('/Dashboord')
-    
+    alert("Account created successfully!");
+    navigate("/dashboord");
   };
-  const goToLogin=()=>{
-    navigate('/Login')
-  }
+  const goToLogin = () => {
+    navigate("/login");
+  };
   return (
     <Container>
-      <Typography variant="h4">إنشاء حساب جديد</Typography>
+      <Typography variant="h4"> Create a new account </Typography>
       <TextField
-        label="اسم المستخدم"
+        label="User name"
         variant="outlined"
         fullWidth
+        name="username"
         margin="normal"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <TextField
-        label="كلمة المرور"
+        label="Password"
         variant="outlined"
         fullWidth
         margin="normal"
+        name="password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <TextField
-        label="تأكيد كلمة المرور"
+        label="Confirm password"
         variant="outlined"
         fullWidth
         margin="normal"
         type="password"
+        name="confirmPassword"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
       <Button variant="contained" color="primary" onClick={handleSignup}>
-        إنشاء الحساب
+        Create account
       </Button>
-      <Button color="secondary"  onClick={goToLogin}>
-        العودة لتسجيل الدخول
+      <Button color="secondary" onClick={goToLogin}>
+        Back to login
       </Button>
     </Container>
   );

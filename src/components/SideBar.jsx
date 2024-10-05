@@ -78,8 +78,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const Array1 = [
-  { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/Dashboord" },
+const usersItems = [
+  { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/dashboord" },
   { text: "Manage Team", icon: <PeopleOutlinedIcon />, path: "/team" },
   {
     text: "Contacts Information",
@@ -93,7 +93,7 @@ const Array1 = [
   },
 ];
 
-const Array2 = [
+const dashboardItems = [
   
   { text: "Profile Form", icon: <PersonOutlinedIcon />, path: "/form" },
   { text: "Calendar", icon: <CalendarTodayOutlinedIcon />, path: "/calendar" },
@@ -104,7 +104,7 @@ const Array2 = [
   },
 ];
 
-const Array3 = [
+const chartItems = [
   { text: "Bar Chart", icon: <BarChartOutlinedIcon sx={{margin:0}} />, path: "/bar" },
   { text: "Pie Chart", icon: <PieChartOutlineOutlinedIcon />, path: "/pie" },
   { text: "Line Chart", icon: <TimelineOutlinedIcon />, path: "/line" },
@@ -112,7 +112,7 @@ const Array3 = [
 ];
 
 // eslint-disable-next-line react/prop-types
-const SidePar = ({ open, handleDrawerClose }) => {
+const SideBar = ({ open, handleDrawerClose }) => {
   let location = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -160,7 +160,7 @@ const SidePar = ({ open, handleDrawerClose }) => {
       <Divider />
 
       <List>
-        {Array1.map((item) => (
+        {usersItems.map((item) => (
           <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
             <Tooltip title={open ? null : item.text} placement="left">
               <ListItemButton
@@ -203,7 +203,7 @@ const SidePar = ({ open, handleDrawerClose }) => {
       <Divider />
 
       <List>
-        {Array2.map((item) => (
+        {dashboardItems.map((item) => (
           <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
             <Tooltip title={open ? null : item.text} placement="left">
               <ListItemButton
@@ -244,7 +244,7 @@ const SidePar = ({ open, handleDrawerClose }) => {
       <Divider />
 
       <List>
-        {Array3.map((item) => (
+        {chartItems.map((item) => (
           <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
             <Tooltip title={open ? null : item.text} placement="left">
               <ListItemButton
@@ -285,4 +285,4 @@ const SidePar = ({ open, handleDrawerClose }) => {
   );
 };
 
-export default SidePar;
+export default SideBar;
